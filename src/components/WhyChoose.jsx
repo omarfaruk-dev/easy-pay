@@ -43,7 +43,7 @@ const features = [
 
 export default function WhyChoose() {
   return (
-    <section className="py-15 sm:py-20 lg:py-30 bg-white">
+    <section className="pt-15 sm:pt-20 lg:pt-30 pb-10 md:pb-15 lg:pb-18 bg-white">
       <div className="max-w-[1170px] mx-auto px-3 sm:px-4 md:px-6">
         {/* Header */}
         <SectionHeader 
