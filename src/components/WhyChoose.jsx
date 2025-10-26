@@ -46,7 +46,7 @@ export default function WhyChoose() {
     <section className="pt-15 sm:pt-20 lg:pt-30 pb-10 md:pb-15 lg:pb-18 bg-white">
       <div className="max-w-[1170px] mx-auto px-3 sm:px-4 md:px-6">
         {/* Header */}
-        <SectionHeader 
+        <SectionHeader
           label="FEATURES"
           title={
             <>
@@ -60,34 +60,62 @@ export default function WhyChoose() {
         {/* Cards Grid */}
         <div
           className="
-            grid grid-cols-1 
-            sm:grid-cols-2 
-            lg:grid-cols-4 
-            gap-6 
-            justify-items-center
+            flex
+            flex-col
+            sm:flex-row
+            gap-6
+            justify-center
+            items-center
           "
         >
-          {features.slice(0, 2).concat(features.slice(2, 4)).map((f) => {
-            const cardClass = `
+          <div className="flex flex-col xl:flex-row items-center text-center gap-6">
+            {features.slice(0, 2).map((f) => {
+              const cardClass = `
               flex flex-col items-center text-center
               rounded-2xl ${f.bg}
-              w-[274px] h-[244px] lg:w-auto
+              w-[274px] h-[244px] xl:w-auto
               py-8 px-4 gap-6
             `;
-            return (
-              <div key={f.id} className={cardClass}>
-                <div>{f.icon}</div>
-                <div>
-                  <h3 className="text-[20px] font-bold text-primary mb-2">
-                    {f.title}
-                  </h3>
-                  <p className="text-base text-accent leading-snug">
-                    {f.text}
-                  </p>
+              return (
+                <div key={f.id} className={cardClass}>
+                  <div>{f.icon}</div>
+                  <div>
+                    <h3 className="text-[20px] font-bold text-primary mb-2">
+                      {f.title}
+                    </h3>
+                    <p className="text-base text-accent leading-snug">
+                      {f.text}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+
+
+          <div className="flex flex-col xl:flex-row items-center text-center gap-6">
+            {features.slice(2, 4).map((f) => {
+              const cardClass = `
+              flex flex-col items-center text-center
+              rounded-2xl ${f.bg}
+              w-[274px] h-[244px] xl:w-auto
+              py-8 px-4 gap-6
+            `;
+              return (
+                <div key={f.id} className={cardClass}>
+                  <div>{f.icon}</div>
+                  <div>
+                    <h3 className="text-[20px] font-bold text-primary mb-2">
+                      {f.title}
+                    </h3>
+                    <p className="text-base text-accent leading-snug">
+                      {f.text}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
