@@ -67,7 +67,7 @@ export default function WhyChoose() {
             justify-items-center
           "
         >
-          {features.map((f) => {
+          {features.slice(0, 2).concat(features.slice(2, 4)).map((f) => {
             const cardClass = `
               flex flex-col items-center text-center
               rounded-2xl ${f.bg}
