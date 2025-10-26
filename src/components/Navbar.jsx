@@ -20,22 +20,22 @@ const Navbar = () => {
     }, []);
 
     return (
-        <>
+        <div className="">
             <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
                 ? 'bg-background/95 backdrop-blur-md border-b border-border'
                 : 'bg-transparent'
                 }`}>
-                <div className="container mx-auto px-4 py-1 md: py-4">
+                <div className="max-w-[1170px] mx-auto px-4 py-1 md:py-4">
                     <div className="flex items-center justify-between">
                         {/* Logo */}
                         <Logo />
 
                         {/* Desktop Navigation Links */}
                         <div className="hidden md:flex items-center space-x-8">
-                            <a href="#" className="text-foreground text-lg hover:text-secondary transition-colors">Home</a>
-                            <a href="#" className="text-foreground text-lg hover:text-secondary transition-colors">Features</a>
-                            <a href="#" className="text-foreground text-lg hover:text-secondary transition-colors">About</a>
-                            <a href="#" className="text-foreground text-lg hover:text-secondary transition-colors">Contact</a>
+                            <a href="#" className="text-accent text-lg hover:text-secondary transition-colors">Home</a>
+                            <a href="#" className="text-accent text-lg hover:text-secondary transition-colors">Features</a>
+                            <a href="#" className="text-accent text-lg hover:text-secondary transition-colors">About</a>
+                            <a href="#" className="text-accent text-lg hover:text-secondary transition-colors">Contact</a>
                         </div>
 
                         {/* Desktop Contact Us Button */}
@@ -90,28 +90,28 @@ const Navbar = () => {
                             <nav className="space-y-6">
                                 <a
                                     href="#"
-                                    className="block text-foreground text-lg font-medium hover:text-secondary transition-colors border-b border-border pb-4"
+                                    className="block text-accent text-lg font-medium hover:text-secondary transition-colors border-b border-border pb-4"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     Home
                                 </a>
                                 <a
                                     href="#"
-                                    className="block text-foreground text-lg font-medium hover:text-secondary transition-colors border-b border-border pb-4"
+                                    className="block text-accent text-lg font-medium hover:text-secondary transition-colors border-b border-border pb-4"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     Features
                                 </a>
                                 <a
                                     href="#"
-                                    className="block text-foreground text-lg font-medium hover:text-secondary transition-colors border-b border-border pb-4"
+                                    className="block text-accent text-lg font-medium hover:text-secondary transition-colors border-b border-border pb-4"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     About
                                 </a>
                                 <a
                                     href="#"
-                                    className="block text-foreground text-lg font-medium hover:text-secondary transition-colors border-b border-border pb-4"
+                                    className="block text-accent text-lg font-medium hover:text-secondary transition-colors border-b border-border pb-4"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     Contact
@@ -132,7 +132,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
