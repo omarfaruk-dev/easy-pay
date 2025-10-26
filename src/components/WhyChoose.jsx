@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import SectionHeader from "./SectionHeader";
 
 import instantPaymentIcon from "../app/assets/icons/Instant-payments.svg";
 import noHiddenFeesIcon from "../app/assets/icons/no-hidden-fees.svg";
@@ -42,18 +43,19 @@ const features = [
 
 export default function WhyChoose() {
   return (
-    <section className="py-16 sm:py-20 lg:py-28 bg-white">
+    <section className="py-15 sm:py-20 lg:py-30 bg-white">
       <div className="max-w-[1170px] mx-auto px-3 sm:px-4 md:px-6">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          <p className="text-sm font-semibold text-general tracking-wide">
-            FEATURES
-          </p>
-          <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0f172a] leading-tight">
-            Why choose Easy Pay for <br className="hidden md:block" />
-            effortless payments?
-          </h2>
-        </div>
+        <SectionHeader 
+          label="FEATURES"
+          title={
+            <>
+              Why choose Easy Pay for <br className="hidden md:block" />
+              effortless payments?
+            </>
+          }
+          align="center"
+        />
 
         {/* Cards Grid */}
         <div
@@ -68,7 +70,7 @@ export default function WhyChoose() {
           {features.map((f) => {
             const cardClass = `
               flex flex-col items-center text-center
-              rounded-2xl shadow-sm ${f.bg}
+              rounded-2xl ${f.bg}
               w-[274px] h-[244px] lg:w-auto
               py-8 px-4 gap-6
             `;
