@@ -1,9 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import SectionHeader from "./SectionHeader";
 import securityBg from "../app/assets/security-bg.webp";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const securityFeatures = [
   {
@@ -51,11 +55,73 @@ const securityFeatures = [
 ];
 
 export default function Security() {
+  const sectionRef = useRef(null);
+  const headerRef = useRef(null);
+  const featuresRef = useRef([]);
+  const backgroundRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Set initial states
+      gsap.set(headerRef.current, { opacity: 0, y: 30 });
+      featuresRef.current.forEach((feature) => {
+        if (feature) {
+          gsap.set(feature, { opacity: 0, y: 50, scale: 0.9 });
+        }
+      });
+      gsap.set(backgroundRef.current, { opacity: 0, scale: 1.1 });
+
+      // Header animation
+      gsap.to(headerRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 75%",
+        },
+      });
+
+      // Background image animation
+      gsap.to(backgroundRef.current, {
+        opacity: 1,
+        scale: 1,
+        duration: 1.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+        },
+      });
+
+      // Features animation with stagger
+      featuresRef.current.forEach((feature, index) => {
+        if (feature) {
+          gsap.to(feature, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.6,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 70%",
+            },
+            delay: index * 0.1, // Stagger by 0.1s
+          });
+        }
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className=" py-16 sm:py-20 lg:py-30 bg-white">
+    <section ref={sectionRef} className=" py-16 sm:py-20 lg:py-30 bg-white">
       <div className="max-w-[1170px] mx-auto px-3 sm:px-4 md:px-6">
         {/* Header */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-8">
+        <div ref={headerRef} className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-8">
           <div className="-mb-5 lg:mb-0">
             <SectionHeader 
               label="SECURITY"
@@ -74,7 +140,7 @@ export default function Security() {
         {/* Security Features Grid */}
         <div className="relative rounded-2xl overflow-hidden">
           {/* Background Image */}
-          <div className="absolute inset-0 z-0">
+          <div ref={backgroundRef} className="absolute inset-0 z-0">
             <Image
               src={securityBg}
               alt="Security background"
@@ -88,7 +154,11 @@ export default function Security() {
           <div className="relative z-10 p-6 sm:p-8 bg-accent/3 backdrop-blur-md">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {securityFeatures.map((feature, index) => (
-                <div key={feature.id} className="relative">
+                <div 
+                  key={feature.id} 
+                  ref={(el) => (featuresRef.current[index] = el)}
+                  className="relative"
+                >
                   <div className="p-6">
                     <div className="flex flex-col">
                       <div className="relative flex items-center justify-start mb-4">

@@ -1,10 +1,15 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import SectionHeader from "./SectionHeader";
 import violetEffect from "../app/assets/violet-effect.svg";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const plans = [
     {
@@ -51,27 +56,92 @@ const plans = [
 ];
 
 export default function Pricing() {
+    const sectionRef = useRef(null);
+    const headerRef = useRef(null);
+    const cardsRef = useRef([]);
+    const backgroundRef = useRef(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            // Set initial states
+            gsap.set(headerRef.current, { opacity: 0, y: 30 });
+            cardsRef.current.forEach((card) => {
+                if (card) {
+                    gsap.set(card, { opacity: 0, y: 60, scale: 0.95 });
+                }
+            });
+            gsap.set(backgroundRef.current, { opacity: 0, scale: 1.2 });
+
+            // Header animation
+            gsap.to(headerRef.current, {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 75%",
+                },
+            });
+
+            // Background animation
+            gsap.to(backgroundRef.current, {
+                opacity: 1,
+                scale: 1,
+                duration: 1.5,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 80%",
+                },
+            });
+
+            // Cards animation with stagger
+            cardsRef.current.forEach((card, index) => {
+                if (card) {
+                    gsap.to(card, {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        duration: 0.8,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: sectionRef.current,
+                            start: "top 70%",
+                        },
+                        delay: index * 0.2, // Stagger by 0.2s
+                    });
+                }
+            });
+        }, sectionRef);
+
+        return () => ctx.revert();
+    }, []);
+
     return (
-        <section className="relative pb-16 sm:pb-20 lg:pb-30 bg-white">
+        <section ref={sectionRef} className="relative pb-16 sm:pb-20 lg:pb-30 bg-white">
             <div className="relative max-w-[1170px] mx-auto px-3 sm:px-4 md:px-6">
                 {/* Header */}
-                <SectionHeader
-                    label="PRICING"
-                    title={
-                        <>
-                            Simple transparent pricing <br className="hidden md:block" />
-                            no hidden fees
-                        </>
-                    }
-                    align="center"
-                />
+                <div ref={headerRef}>
+                    <SectionHeader
+                        label="PRICING"
+                        title={
+                            <>
+                                Simple transparent pricing <br className="hidden md:block" />
+                                no hidden fees
+                            </>
+                        }
+                        align="center"
+                    />
+                </div>
 
                 {/* Pricing Cards */}
                 <div className="relative z-10">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {plans.map((plan) => (
+                        {plans.map((plan, index) => (
                             <div
                                 key={plan.id}
+                                ref={(el) => (cardsRef.current[index] = el)}
                                 className={`relative z-10 flex flex-col rounded-2xl p-6 sm:p-8 h-full ${plan.isPopular
                                     ? "bg-primary text-primary-foreground border border-primary"
                                     : "bg-white border border-gray-200"
@@ -137,7 +207,7 @@ export default function Pricing() {
             </div>
 
             {/* Violet Effect Background */}
-            <div className="absolute bottom-4/12 lg:-bottom-40 xl:-bottom-30 left-1/2 transform -translate-x-1/2 z-0 pointer-events-none">
+            <div ref={backgroundRef} className="absolute bottom-4/12 lg:-bottom-40 xl:-bottom-30 left-1/2 transform -translate-x-1/2 z-0 pointer-events-none">
                 <Image
                     src={violetEffect}
                     alt="Violet effect"
