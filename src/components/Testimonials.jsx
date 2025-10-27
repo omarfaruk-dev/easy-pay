@@ -44,7 +44,7 @@ export default function Testimonials() {
             if (window.innerWidth >= 1024) {
                 setItemsPerView(2);
             } else if (window.innerWidth >= 768) {
-                setItemsPerView(1);
+                setItemsPerView(2);
             } else {
                 setItemsPerView(1);
             }
@@ -56,33 +56,35 @@ export default function Testimonials() {
     }, []);
 
     const nextSlide = useCallback(() => {
-        setCurrentIndex((prevIndex) => 
-            prevIndex >= testimonials.length - itemsPerView ? 0 : prevIndex + 1
-        );
+        setCurrentIndex((prevIndex) => {
+            const maxIndex = Math.max(0, testimonials.length - itemsPerView);
+            return prevIndex >= maxIndex ? 0 : prevIndex + 1;
+        });
     }, [itemsPerView]);
 
     const prevSlide = useCallback(() => {
-        setCurrentIndex((prevIndex) => 
-            prevIndex <= 0 ? testimonials.length - itemsPerView : prevIndex - 1
-        );
+        setCurrentIndex((prevIndex) => {
+            const maxIndex = Math.max(0, testimonials.length - itemsPerView);
+            return prevIndex <= 0 ? maxIndex : prevIndex - 1;
+        });
     }, [itemsPerView]);
 
     const visibleTestimonials = testimonials.slice(currentIndex, currentIndex + itemsPerView);
 
     return (
-        <section className="py-16 sm:py-20 lg:py-28 bg-accent/10">
-            <div className="max-w-[1170px] mx-auto px-3 sm:px-4 md:px-6">
+        <section className="py-16 sm:py-20 lg:py-28 bg-accent/5">
+            <div className="px-3 sm:px-4 md:px-6 lg:px-0 lg:ml-[2%] xl:ml-[10%]">
                 {/* Header Section */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-8 mb-12">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-8">
                     {/* Left Side - Text Content */}
                     <div className="lg:pr-8">
                         <SectionHeader
                             label="TESTIMONIAL"
                             title="We've build trust with reviews from real users"
                             align="center"
-                            className="lg:text-left mb-5 md:max-w-xl mx-auto"
+                            className="lg:text-left md:max-w-xl mx-auto"
                         />
-                        <p className="text-base text-accent leading-relaxed mt-4 text-center lg:text-left">
+                        <p className="ml-5 text-base text-accent leading-relaxed text-center lg:text-left">
                             Boost your credibility by featuring genuine testimonials from real users, 
                             showcasing their positive experiences and satisfaction with Monks Pay services.
                         </p>
@@ -91,13 +93,13 @@ export default function Testimonials() {
                         <div className="flex gap-4 mt-8 justify-center lg:justify-start">
                             <button 
                                 onClick={prevSlide}
-                                className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:bg-secondary hover:text-white transition-all"
+                                className="w-12 h-12 rounded-full flex items-center justify-center border border-primary hover:bg-primary hover:text-white transition-all"
                             >
                                 <ChevronLeft className="w-5 h-5" />
                             </button>
                             <button 
                                 onClick={nextSlide}
-                                className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:bg-secondary hover:text-white transition-all"
+                                className="w-12 h-12 rounded-full flex items-center justify-center border border-primary hover:bg-primary hover:text-white transition-all"
                             >
                                 <ChevronRight className="w-5 h-5" />
                             </button>
@@ -109,7 +111,7 @@ export default function Testimonials() {
                         {visibleTestimonials.map((testimonial) => (
                             <div
                                 key={testimonial.id}
-                                className="w-full min-w-[300px] lg:w-[calc(50%-12px)] bg-white border border-gray-200 rounded-2xl p-6 shadow-sm animate-fade-in"
+                                className="w-full min-w-[300px] lg:w-[calc(50%-12px)] bg-white rounded-2xl p-6 shadow-sm animate-fade-in flex flex-col"
                             >
                                 {/* Stars Rating */}
                                 <div className="flex gap-1 mb-4">
@@ -122,7 +124,7 @@ export default function Testimonials() {
                                 </div>
 
                                 {/* Testimonial Text */}
-                                <p className="text-base text-accent leading-relaxed mb-6">
+                                <p className="text-base text-accent leading-relaxed mb-6 grow">
                                     {testimonial.text}
                                 </p>
 
