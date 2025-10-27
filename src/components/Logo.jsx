@@ -4,7 +4,7 @@ import logo from "../app/assets/easy-pay-logo.svg";
 
 const Logo = ({ className = ""}) => {
     return (
-        <div className={`flex items-center justify-center space-x-2 ${className}`}>
+        <div className={`flex items-center space-x-2 ${className}`}>
             <div className="flex items-center justify-center">
                 <Image
                     src={logo}
