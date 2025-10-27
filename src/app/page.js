@@ -4,7 +4,7 @@ import Security from "@/components/Security";
 import WhyChoose from "@/components/WhyChoose";
 import HowItWorks from "@/components/HowItWorks";
 import Pricing from "@/components/Pricing";
-
+import Testimonials from "@/components/Testimonials";
 export default function Home() {
   return (
     <div className="min-h-screen">
@@ -14,6 +14,7 @@ export default function Home() {
       <HowItWorks/>
       <Security/>
       <Pricing/>
+      <Testimonials/>
     </div>
   );
 }
