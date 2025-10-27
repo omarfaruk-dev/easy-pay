@@ -1,13 +1,17 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import SectionHeader from "./SectionHeader";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import instantPaymentIcon from "../app/assets/icons/Instant-payments.svg";
 import noHiddenFeesIcon from "../app/assets/icons/no-hidden-fees.svg";
 import digitalWalletIcon from "../app/assets/icons/digital-wallet.svg";
 import secureTransactionsIcon from "../app/assets/icons/secure-transactions.svg";
+
+gsap.registerPlugin(ScrollTrigger);
 
 
 const features = [
@@ -42,20 +46,75 @@ const features = [
 ];
 
 export default function Features() {
+  const sectionRef = useRef(null);
+  const headerRef = useRef(null);
+  const cardsRef = useRef([]);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Set initial states for all cards
+      cardsRef.current.forEach((card) => {
+        if (card) {
+          gsap.set(card, { opacity: 0, y: 50, scale: 0.9 });
+        }
+      });
+
+      // Set initial state for header
+      gsap.set(headerRef.current, { opacity: 0, y: 30 });
+
+      // Create timeline for header
+      const headerTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+        },
+      });
+
+      headerTl.to(headerRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      });
+
+      // Animate cards with stagger
+      cardsRef.current.forEach((card, index) => {
+        if (card) {
+          gsap.to(card, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 70%",
+            },
+            delay: index * 0.15, // Stagger animation by 0.15s
+          });
+        }
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="pt-15 sm:pt-20 lg:pt-30 pb-10 md:pb-15 lg:pb-18 bg-white">
+    <section ref={sectionRef} className="pt-15 sm:pt-20 lg:pt-30 pb-10 md:pb-15 lg:pb-18 bg-white">
       <div className="max-w-[1170px] mx-auto px-3 sm:px-4 md:px-6">
         {/* Header */}
-        <SectionHeader
-          label="FEATURES"
-          title={
-            <>
-              Why choose Easy Pay for <br className="hidden md:block" />
-              effortless payments?
-            </>
-          }
-          align="center"
-        />
+        <div ref={headerRef}>
+          <SectionHeader
+            label="FEATURES"
+            title={
+              <>
+                Why choose Easy Pay for <br className="hidden md:block" />
+                effortless payments?
+              </>
+            }
+            align="center"
+          />
+        </div>
 
         {/* Cards Grid */}
         <div
@@ -69,7 +128,7 @@ export default function Features() {
           "
         >
           <div className="flex flex-col xl:flex-row items-center text-center gap-6">
-            {features.slice(0, 2).map((f) => {
+            {features.slice(0, 2).map((f, index) => {
               const cardClass = `
               flex flex-col items-center text-center
               rounded-2xl ${f.bg}
@@ -77,7 +136,11 @@ export default function Features() {
               py-8 px-4 gap-6
             `;
               return (
-                <div key={f.id} className={cardClass}>
+                <div
+                  key={f.id}
+                  ref={(el) => (cardsRef.current[index] = el)}
+                  className={cardClass}
+                >
                   <div>{f.icon}</div>
                   <div>
                     <h3 className="text-[20px] font-bold text-primary mb-2">
@@ -94,7 +157,7 @@ export default function Features() {
 
 
           <div className="flex flex-col xl:flex-row items-center text-center gap-6">
-            {features.slice(2, 4).map((f) => {
+            {features.slice(2, 4).map((f, index) => {
               const cardClass = `
               flex flex-col items-center text-center
               rounded-2xl ${f.bg}
@@ -102,7 +165,11 @@ export default function Features() {
               py-8 px-4 gap-6
             `;
               return (
-                <div key={f.id} className={cardClass}>
+                <div
+                  key={f.id}
+                  ref={(el) => (cardsRef.current[index + 2] = el)}
+                  className={cardClass}
+                >
                   <div>{f.icon}</div>
                   <div>
                     <h3 className="text-[20px] font-bold text-primary mb-2">

@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Apple, Play, TrendingUp } from "lucide-react";
 import Image from "next/image";
@@ -12,10 +12,41 @@ import vectorLine from "@/app/assets/hero-vector-line.svg";
 import playStore from "@/app/assets/icons/play-store.svg";
 import appStore from "@/app/assets/icons/app-store.svg";
 import Navbar from "./Navbar";
+import gsap from 'gsap';
 
 const Hero = () => {
+    const heroRef = useRef(null);
+    const leftContentRef = useRef(null);
+    const rightContentRef = useRef(null);
+    const floatingCard1Ref = useRef(null);
+    const floatingCard2Ref = useRef(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            // Set initial states
+            gsap.set(leftContentRef.current, { opacity: 0, y: 50 });
+            gsap.set(rightContentRef.current, { opacity: 0, y: 50 });
+            gsap.set(floatingCard1Ref.current, { opacity: 0, x: -50 });
+            gsap.set(floatingCard2Ref.current, { opacity: 0, x: 50 });
+
+            // Create timeline
+            const tl = gsap.timeline({
+                defaults: { ease: "power3.out", duration: 1 }
+            });
+
+            // Animate elements in sequence
+            tl.to(leftContentRef.current, { opacity: 1, y: 0, duration: 1.2 })
+              .to(rightContentRef.current, { opacity: 1, y: 0, duration: 1 }, "-=0.6")
+              .to(floatingCard1Ref.current, { opacity: 1, x: 0, duration: 0.8 }, "-=0.4")
+              .to(floatingCard2Ref.current, { opacity: 1, x: 0, duration: 0.8 }, "-=0.5");
+
+        }, heroRef);
+
+        return () => ctx.revert();
+    }, []);
+
     return (
-        <div className="h-fit mx-2 sm:mx-4 relative rounded-2xl overflow-hidden">
+        <div ref={heroRef} className="h-fit mx-2 sm:mx-4 relative rounded-2xl overflow-hidden">
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
                 <Image
@@ -38,7 +69,7 @@ const Hero = () => {
                 <div className="container mx-auto pt-26 sm:pt-36 lg:pt-20 2xl:pt-30">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-0 tems-center">
                         {/* Left Content */}
-                        <div className="flex flex-col text-center lg:text-left justify-center px-2 sm:px-0">
+                        <div ref={leftContentRef} className="flex flex-col text-center lg:text-left justify-center px-2 sm:px-0">
                             <p className="text-sm sm:text-lg md:text-xl lg:text-base uppercase font-bold text-general mb-2">Easy Payment</p>
                             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[50px] xl:text-6xl leading-8 sm:leading-12 md:leading-14 lg:leading-15 xl:leading-18 font-bold mb-4 sm:mb-6 text-primary relative">
                                 <span className="relative inline-block">
@@ -84,7 +115,7 @@ const Hero = () => {
                         </div>
 
                         {/* Right Content - Hero Image */}
-                        <div className="relative flex items-center justify-center h-full max-h-80 sm:max-h-[400px] md:max-h-[500px] lg:max-h-full">
+                        <div ref={rightContentRef} className="relative flex items-center justify-center h-full max-h-80 sm:max-h-[400px] md:max-h-[500px] lg:max-h-full">
                             <div className="relative sm:w-full h-full flex sm:items-end justify-center">
                                 <Image
                                     src={heroImage}
@@ -94,7 +125,7 @@ const Hero = () => {
                             </div>
 
                             {/* Floating left Cards */}
-                            <div className="absolute bottom-2 left-0 sm:left-2 md:left-14 lg:-left-24 bg-white rounded-xl p-3.5 sm:p-4 lg:p-5 shadow-lg z-20">
+                            <div ref={floatingCard1Ref} className="absolute bottom-2 left-0 sm:left-2 md:left-14 lg:-left-24 bg-white rounded-xl p-3.5 sm:p-4 lg:p-5 shadow-lg z-20">
                                 <div className="">
                                     <div className="text-sx sm:text-base font-semibold text-primary">Payment Received</div>
                                     <div className="text-sm sm:text-lg font-bold text-secondary leading-6 -mt-1 sm:-,t-0 mb-0 sm:mb-2">+35,890.00</div>
@@ -109,7 +140,7 @@ const Hero = () => {
                             </div>
 
                             {/* Avatar Group card*/}
-                            <div className="absolute bottom-26 sm:bottom-31 md:bottom-43 lg:bottom-44 xl:bottom-50 right-0 md:right-24 lg:right-0 bg-card rounded-xl p-3.5 sm:p-4 shadow-lg z-20">
+                            <div ref={floatingCard2Ref} className="absolute bottom-26 sm:bottom-31 md:bottom-43 lg:bottom-44 xl:bottom-50 right-0 md:right-24 lg:right-0 bg-card rounded-xl p-3.5 sm:p-4 shadow-lg z-20">
                                 <div className="flex items-center space-x-1 sm:space-x-2">
                                     <div className="flex -space-x-3 sm:-space-x-2">
                                         <Image
