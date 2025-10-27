@@ -7,34 +7,38 @@ import Pricing from "@/components/Pricing";
 import Testimonials from "@/components/Testimonials";
 import CallToAction from "@/components/CallToAction";
 import Footer from "@/components/Footer";
+import Statistics from "@/components/Statistics";
 export default function Home() {
   return (
     <div className="min-h-screen">
       <section id="hero" className="scroll-mt-24">
-        <Hero/>
+        <Hero />
       </section>
       <section id="features" className="scroll-mt-24">
-        <Features/>
+        <Features />
       </section>
       <section id="brands" className="scroll-mt-24">
-        <FeaturedBrand/>
+        <FeaturedBrand />
       </section>
       <section id="how-it-works" className="scroll-mt-24">
-        <HowItWorks/>
+        <HowItWorks />
       </section>
       <section id="security" className="scroll-mt-24">
-        <Security/>
+        <Security />
+      </section>
+      <section id="statistics" className="scroll-mt-24">
+        <Statistics />
       </section>
       <section id="pricing" className="scroll-mt-24">
-        <Pricing/>
+        <Pricing />
       </section>
       <section id="testimonials" className="scroll-mt-24">
-        <Testimonials/>
+        <Testimonials />
       </section>
       <section id="contact" className="scroll-mt-24">
-        <CallToAction/>
+        <CallToAction />
       </section>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

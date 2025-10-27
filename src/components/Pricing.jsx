@@ -119,7 +119,7 @@ export default function Pricing() {
     }, []);
 
     return (
-        <section ref={sectionRef} className="relative pb-16 sm:pb-20 lg:pb-30 bg-white">
+        <section ref={sectionRef} className="relative py-16 sm:py-20 lg:py-30 bg-white">
             <div className="relative max-w-[1170px] mx-auto px-3 sm:px-4 md:px-6">
                 {/* Header */}
                 <div ref={headerRef}>
