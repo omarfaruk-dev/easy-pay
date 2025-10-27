@@ -48,7 +48,7 @@ const HowItWorks = () => {
                         </div>
                         <div className="flex items-center pb-5 md:pb-10 lg:pb-0">
                             <p className="text-base text-accent leading-relaxed md:max-w-xl mx-auto md:text-center">
-                                <Button variant="default">
+                                <Button variant="default" className="mt-6 md:mt-0">
                                     Get Started Now
                                 </Button>
                             </p>

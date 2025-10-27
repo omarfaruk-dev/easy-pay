@@ -18,7 +18,7 @@ const SectionHeader = ({
   return (
     <div className={`${containerClasses} space-y-1`}>
       {label && (
-        <p className={`text-sm font-semibold text-general tracking-wide ${labelClassName}`}>
+        <p className={`text-base font-semibold text-general tracking-wide ${labelClassName}`}>
           {label}
         </p>
       )}

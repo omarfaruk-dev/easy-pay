@@ -41,7 +41,7 @@ const features = [
   },
 ];
 
-export default function WhyChoose() {
+export default function Features() {
   return (
     <section className="pt-15 sm:pt-20 lg:pt-30 pb-10 md:pb-15 lg:pb-18 bg-white">
       <div className="max-w-[1170px] mx-auto px-3 sm:px-4 md:px-6">
@@ -73,7 +73,7 @@ export default function WhyChoose() {
               const cardClass = `
               flex flex-col items-center text-center
               rounded-2xl ${f.bg}
-              w-[274px] h-[244px] xl:w-auto
+              w-[274px] h-[244px]
               py-8 px-4 gap-6
             `;
               return (
@@ -98,7 +98,7 @@ export default function WhyChoose() {
               const cardClass = `
               flex flex-col items-center text-center
               rounded-2xl ${f.bg}
-              w-[274px] h-[244px] xl:w-auto
+              w-[274px] h-[244px] 
               py-8 px-4 gap-6
             `;
               return (
@@ -116,6 +116,8 @@ export default function WhyChoose() {
               );
             })}
           </div>
+
+
         </div>
       </div>
     </section>

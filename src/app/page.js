@@ -1,7 +1,7 @@
-import Featured from "@/components/Featured";
+import FeaturedBrand from "@/components/FeaturedBrand";
 import Hero from "@/components/Hero";
 import Security from "@/components/Security";
-import WhyChoose from "@/components/WhyChoose";
+import Features from "@/components/Features";
 import HowItWorks from "@/components/HowItWorks";
 import Pricing from "@/components/Pricing";
 import Testimonials from "@/components/Testimonials";
@@ -11,8 +11,8 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <Hero/>
-      <WhyChoose/>
-      <Featured/>
+      <Features/>
+      <FeaturedBrand/>
       <HowItWorks/>
       <Security/>
       <Pricing/>

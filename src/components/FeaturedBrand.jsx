@@ -28,7 +28,7 @@ const extendedBrands = [
   ...brands.map(brand => ({ ...brand, id: `${brand.id}-copy2` })),
 ];
 
-export default function Featured() {
+export default function FeaturedBrand() {
   return (
     <section className="pb-8 sm:pb-12 lg:pb-20">
         <div className="relative">
