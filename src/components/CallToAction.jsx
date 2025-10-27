@@ -6,8 +6,9 @@ import callToActionImg from '../app/assets/call-to-action.webp';
 
 export default function CallToAction() {
     return (
-        <section className="py-16 sm:py-20 lg:py-30 px-3 sm:px-4 md:px-6">
-            <div className="max-w-[1170px] mx-auto relative rounded-3xl overflow-hidden">
+        <section className="pt-16 sm:pt-20 lg:pt-30">
+            <div className="max-w-[1170px] mx-auto px-3 sm:px-4 md:px-6">
+            <div className="relative rounded-3xl overflow-hidden">
                 {/* Background Image */}
                 <div className="absolute inset-0">
                     <Image
@@ -49,6 +50,7 @@ export default function CallToAction() {
                         </Button>
                     </div>
                 </div>
+            </div>
             </div>
         </section>
     );

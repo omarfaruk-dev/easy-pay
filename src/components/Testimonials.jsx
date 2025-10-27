@@ -73,18 +73,18 @@ export default function Testimonials() {
 
     return (
         <section className="py-16 sm:py-20 lg:py-28 bg-accent/5">
-            <div className="px-3 sm:px-4 md:px-6 lg:px-0 lg:ml-[2%] xl:ml-[10%]">
+            <div className="px-3 sm:px-4 md:px-6 lg:px-0 xl:pl-10 lg:ml-[2%] xl:ml-[10%]">
                 {/* Header Section */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-8">
                     {/* Left Side - Text Content */}
-                    <div className="lg:pr-8">
+                    <div className="xl:-ml-30 2xl:ml-20 xl:px-20">
                         <SectionHeader
                             label="TESTIMONIAL"
                             title="We've build trust with reviews from real users"
                             align="center"
                             className="lg:text-left md:max-w-xl mx-auto"
                         />
-                        <p className="ml-5 text-base text-accent leading-relaxed text-center lg:text-left">
+                        <p className="text-base text-accent leading-relaxed text-center lg:text-left">
                             Boost your credibility by featuring genuine testimonials from real users, 
                             showcasing their positive experiences and satisfaction with Monks Pay services.
                         </p>
