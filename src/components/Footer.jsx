@@ -1,12 +1,82 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "./Logo";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Footer() {
+  const footerRef = useRef(null);
+  const leftSectionRef = useRef(null);
+  const linksSectionRef = useRef(null);
+  const copyrightRef = useRef(null);
+
+  // Smooth scroll function
+  const handleSmoothScroll = (e, sectionId) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 100; // Account for fixed navbar with extra spacing
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({
+        top: elementPosition - offset,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Set initial states
+      gsap.set(leftSectionRef.current, { opacity: 0, y: 30 });
+      gsap.set(linksSectionRef.current, { opacity: 0, y: 30 });
+      gsap.set(copyrightRef.current, { opacity: 0 });
+
+      // Create timeline
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: footerRef.current,
+          start: "top 85%",
+        },
+      });
+
+      // Animate sections
+      tl.to(leftSectionRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      })
+        .to(
+          linksSectionRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+          },
+          "-=0.4"
+        )
+        .to(
+          copyrightRef.current,
+          {
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out",
+          },
+          "-=0.4"
+        );
+    }, footerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <footer className="relative bg-white overflow-hidden">
+    <footer ref={footerRef} className="relative bg-white overflow-hidden">
       {/* Enhanced Violet Gradient Effect */}
       <div className="absolute bottom-0 left-0 right-0 z-0 pointer-events-none">
         <div className="relative w-full h-[200px]">
@@ -23,10 +93,10 @@ export default function Footer() {
       </div>
 
       {/* Main Footer Content */}
-      <div className="relative z-10 max-w-[1170px] mx-auto px-4 sm:px-6 md:px-8 py-14 sm:py-16 lg:py-20">
+      <div className="relative z-10 max-w-[1170px] mx-auto px-4 sm:px-6 md:px-8 pt-14 sm:pt-16 lg:pt-20 pb-5">
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-10">
           {/* Left Section */}
-          <div className="max-w-sm">
+          <div ref={leftSectionRef} className="max-w-sm">
             <Logo className="justify-start mb-5" />
             <p className="text-base text-accent leading-relaxed">
               Easy Pay offers secure, seamless, and fee-free payments for effortless global
@@ -35,42 +105,46 @@ export default function Footer() {
           </div>
 
           {/* Right Section */}
-          <div className="flex flex-col sm:flex-row gap-12">
+          <div ref={linksSectionRef} className="flex flex-col sm:flex-row gap-12">
             {/* Short Links */}
             <div>
               <h4 className="text-xl font-bold text-primary mb-4">Short links</h4>
               <ul className="space-y-3">
                 <li>
-                  <Link
+                  <a
                     href="#features"
-                    className="text-base text-accent hover:text-general transition-colors"
+                    onClick={(e) => handleSmoothScroll(e, 'features')}
+                    className="text-base text-accent hover:text-secondary transition-colors"
                   >
                     Features
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link
+                  <a
                     href="#how-it-works"
-                    className="text-base text-accent hover:text-general transition-colors"
+                    onClick={(e) => handleSmoothScroll(e, 'how-it-works')}
+                    className="text-base text-accent hover:text-secondary transition-colors"
                   >
                     How it works
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link
+                  <a
                     href="#security"
-                    className="text-base text-accent hover:text-general transition-colors"
+                    onClick={(e) => handleSmoothScroll(e, 'security')}
+                    className="text-base text-accent hover:text-secondary transition-colors"
                   >
                     Security
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link
-                    href="#testimonial"
-                    className="text-base text-accent hover:text-general transition-colors"
+                  <a
+                    href="#testimonials"
+                    onClick={(e) => handleSmoothScroll(e, 'testimonials')}
+                    className="text-base text-accent hover:text-secondary transition-colors"
                   >
-                    Testimonial
-                  </Link>
+                    Testimonials
+                  </a>
                 </li>
               </ul>
             </div>
@@ -80,27 +154,29 @@ export default function Footer() {
               <h4 className="text-xl font-bold text-primary mb-4">Other pages</h4>
               <ul className="space-y-3">
                 <li>
+                  <a
+                    href="#pricing"
+                    onClick={(e) => handleSmoothScroll(e, 'pricing')}
+                    className="text-base text-accent hover:text-secondary transition-colors"
+                  >
+                    Pricing
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#contact"
+                    onClick={(e) => handleSmoothScroll(e, 'contact')}
+                    className="text-base text-accent hover:text-secondary transition-colors"
+                  >
+                    Contact Us
+                  </a>
+                </li>
+                <li>
                   <Link
                     href="/privacy-policy"
-                    className="text-base text-accent hover:text-general transition-colors"
+                    className="text-base text-accent hover:text-secondary transition-colors"
                   >
                     Privacy policy
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/terms"
-                    className="text-base text-accent hover:text-general transition-colors"
-                  >
-                    Terms & conditions
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/404"
-                    className="text-base text-accent hover:text-general transition-colors"
-                  >
-                    404
                   </Link>
                 </li>
               </ul>
@@ -110,7 +186,7 @@ export default function Footer() {
       </div>
 
       {/* Copyright Section - Fixed width and height */}
-      <div className="relative z-10 ">
+      <div ref={copyrightRef} className="relative z-10 ">
         <div className="max-w-[1170px] mx-auto px-4 sm:px-6 md:px-8 border-t border-gray-200">
           <div className="h-[50px] flex items-center justify-center backdrop-blur-md">
             <p className="text-center text-sm text-accent">

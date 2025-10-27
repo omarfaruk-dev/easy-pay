@@ -19,6 +19,21 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Smooth scroll function
+    const handleSmoothScroll = (e, sectionId) => {
+        e.preventDefault();
+        const element = document.getElementById(sectionId);
+        if (element) {
+            const offset = 100; // Account for fixed navbar with extra spacing
+            const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+            window.scrollTo({
+                top: elementPosition - offset,
+                behavior: 'smooth'
+            });
+        }
+        setIsMobileMenuOpen(false); // Close mobile menu after click
+    };
+
     return (
         <div className="">
             <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
@@ -28,19 +43,46 @@ const Navbar = () => {
                 <div className="max-w-[1170px] mx-auto px-4 py-1 md:py-4">
                     <div className="flex items-center justify-between">
                         {/* Logo */}
-                        <Logo />
+                        <Logo onClick={(e) => handleSmoothScroll(e, 'hero')} />
 
                         {/* Desktop Navigation Links */}
                         <div className="hidden md:flex items-center space-x-8">
-                            <a href="#" className="text-accent text-lg hover:text-secondary transition-colors">Home</a>
-                            <a href="#" className="text-accent text-lg hover:text-secondary transition-colors">Features</a>
-                            <a href="#" className="text-accent text-lg hover:text-secondary transition-colors">About</a>
-                            <a href="#" className="text-accent text-lg hover:text-secondary transition-colors">Contact</a>
+                            <a 
+                                href="#features" 
+                                onClick={(e) => handleSmoothScroll(e, 'features')}
+                                className="text-accent text-lg hover:text-secondary transition-colors"
+                            >
+                                Features
+                            </a>
+                            <a 
+                                href="#how-it-works" 
+                                onClick={(e) => handleSmoothScroll(e, 'how-it-works')}
+                                className="text-accent text-lg hover:text-secondary transition-colors"
+                            >
+                                How It Works
+                            </a>
+                            <a 
+                                href="#security" 
+                                onClick={(e) => handleSmoothScroll(e, 'security')}
+                                className="text-accent text-lg hover:text-secondary transition-colors"
+                            >
+                                Security
+                            </a>
+                            <a 
+                                href="#pricing" 
+                                onClick={(e) => handleSmoothScroll(e, 'pricing')}
+                                className="text-accent text-lg hover:text-secondary transition-colors"
+                            >
+                                Pricing
+                            </a>
                         </div>
 
                         {/* Desktop Contact Us Button */}
                         <div className="hidden md:flex items-center space-x-4">
-                            <Button variant="default">
+                            <Button 
+                                variant="default"
+                                onClick={(e) => handleSmoothScroll(e, 'contact')}
+                            >
                                 Contact Us
                             </Button>
                         </div>
@@ -76,7 +118,7 @@ const Navbar = () => {
                     <div className="flex flex-col h-full">
                         {/* Mobile Menu Header */}
                         <div className="flex items-center justify-between px-6 py-3 border-b border-border">
-                            <Logo />
+                            <Logo onClick={(e) => handleSmoothScroll(e, 'hero')} />
                             <button
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 className="p-2 hover:bg-accent rounded-full transition-colors"
@@ -89,38 +131,38 @@ const Navbar = () => {
                         <div className="flex-1 px-6 py-8">
                             <nav className="space-y-6">
                                 <a
-                                    href="#"
+                                    href="#features"
+                                    onClick={(e) => handleSmoothScroll(e, 'features')}
                                     className="block text-accent text-lg font-medium hover:text-secondary transition-colors border-b border-border pb-4"
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                >
-                                    Home
-                                </a>
-                                <a
-                                    href="#"
-                                    className="block text-accent text-lg font-medium hover:text-secondary transition-colors border-b border-border pb-4"
-                                    onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     Features
                                 </a>
                                 <a
-                                    href="#"
+                                    href="#how-it-works"
+                                    onClick={(e) => handleSmoothScroll(e, 'how-it-works')}
                                     className="block text-accent text-lg font-medium hover:text-secondary transition-colors border-b border-border pb-4"
-                                    onClick={() => setIsMobileMenuOpen(false)}
                                 >
-                                    About
+                                    How It Works
                                 </a>
                                 <a
-                                    href="#"
+                                    href="#security"
+                                    onClick={(e) => handleSmoothScroll(e, 'security')}
                                     className="block text-accent text-lg font-medium hover:text-secondary transition-colors border-b border-border pb-4"
-                                    onClick={() => setIsMobileMenuOpen(false)}
                                 >
-                                    Contact
+                                    Security
+                                </a>
+                                <a
+                                    href="#pricing"
+                                    onClick={(e) => handleSmoothScroll(e, 'pricing')}
+                                    className="block text-accent text-lg font-medium hover:text-secondary transition-colors border-b border-border pb-4"
+                                >
+                                    Pricing
                                 </a>
                                 {/* Mobile CTA Button */}
                                 <Button
                                     variant="default"
                                     className="w-full"
-                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    onClick={(e) => handleSmoothScroll(e, 'contact')}
                                 >
                                     Contact Us
                                 </Button>
