@@ -8,6 +8,7 @@ import Testimonials from "@/components/Testimonials";
 import CallToAction from "@/components/CallToAction";
 import Footer from "@/components/Footer";
 import Statistics from "@/components/Statistics";
+import Contact from "@/components/Contact";
 export default function Home() {
   return (
     <div className="min-h-screen">
@@ -35,8 +36,11 @@ export default function Home() {
       <section id="testimonials" className="scroll-mt-24">
         <Testimonials />
       </section>
-      <section id="contact" className="scroll-mt-24">
+      <section>
         <CallToAction />
+      </section>
+      <section id="contact" className="scroll-mt-24">
+        <Contact />
       </section>
       <Footer />
     </div>
