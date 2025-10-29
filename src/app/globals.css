@@ -110,3 +110,20 @@
 .animate-fade-in {
   animation: fade-in 0.3s ease-in-out;
 }
+
+/* Custom breakpoint for 1440px to 1535px */
+@media (min-width: 1440px) and (max-width: 1535px) {
+  .custom-1440 {
+    margin-left: -30px;
+    padding-left: 10px;
+  }
+}
+
+@media (min-width: 1550px) and (max-width: 1920px) {
+  .custom-1550 {
+    margin-left: 7%;
+    padding-left: 12%;
+  }
+}
+
+

@@ -46,7 +46,7 @@ const Hero = () => {
     }, []);
 
     return (
-        <div ref={heroRef} className="h-fit mx-2 sm:mx-4 relative rounded-2xl overflow-hidden">
+        <div ref={heroRef} className="h-fit mx-2 mt-5 sm:mx-4 relative rounded-2xl overflow-hidden">
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
                 <Image

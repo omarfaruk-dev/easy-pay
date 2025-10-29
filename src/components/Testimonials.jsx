@@ -67,7 +67,7 @@ export default function Testimonials() {
         const ctx = gsap.context(() => {
             // Set initial states
             gsap.set(headerRef.current, { opacity: 0, y: 30 });
-            gsap.set(cardsContainerRef.current, { opacity: 0, x: 50 });
+            gsap.set(cardsContainerRef.current, { opacity: 0, y: 30 });
 
             // Header animation
             gsap.to(headerRef.current, {
@@ -84,12 +84,12 @@ export default function Testimonials() {
             // Cards container animation
             gsap.to(cardsContainerRef.current, {
                 opacity: 1,
-                x: 0,
+                y: 0,
                 duration: 1,
                 ease: "power3.out",
                 scrollTrigger: {
                     trigger: sectionRef.current,
-                    start: "top 70%",
+                    start: "top 75%",
                 },
             });
         }, sectionRef);
@@ -119,7 +119,7 @@ export default function Testimonials() {
                 {/* Header Section */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-8">
                     {/* Left Side - Text Content */}
-                    <div ref={headerRef} className="xl:-ml-30 2xl:ml-20 xl:px-20">
+                    <div ref={headerRef} className="xl:-ml-38 2xl:-ml-17 xl:px-15 2xl:px-20 custom-1440 custom-1550">
                         <SectionHeader
                             label="TESTIMONIAL"
                             title="We've build trust with reviews from real users"
