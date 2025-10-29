@@ -70,7 +70,6 @@ export default function Pricing() {
                     gsap.set(card, { opacity: 0, y: 60, scale: 0.95 });
                 }
             });
-            gsap.set(backgroundRef.current, { opacity: 0, scale: 1.2 });
 
             // Header animation
             gsap.to(headerRef.current, {
@@ -81,18 +80,6 @@ export default function Pricing() {
                 scrollTrigger: {
                     trigger: sectionRef.current,
                     start: "top 75%",
-                },
-            });
-
-            // Background animation
-            gsap.to(backgroundRef.current, {
-                opacity: 1,
-                scale: 1,
-                duration: 1.5,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top 80%",
                 },
             });
 
@@ -207,7 +194,7 @@ export default function Pricing() {
             </div>
 
             {/* Violet Effect Background */}
-            <div ref={backgroundRef} className="absolute bottom-4/12 lg:-bottom-40 xl:-bottom-30 left-1/2 transform -translate-x-1/2 z-0 pointer-events-none">
+            <div className="absolute bottom-4/12 lg:-bottom-20 xl:-bottom-30 left-1/2 transform -translate-x-1/2 z-0 pointer-events-none">
                 <Image
                     src={violetEffect}
                     alt="Violet effect"
