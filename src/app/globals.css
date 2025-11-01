@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -125,5 +126,18 @@
     padding-left: 12%;
   }
 }
+
+
+:root {
+  --section-scroll-margin: 6rem;
+}
+
+.section-scroll {
+  scroll-margin-top: var(--section-scroll-margin);
+}
+
+/* html {
+  scroll-behavior: smooth;
+} */
 
 

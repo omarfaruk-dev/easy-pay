@@ -59,8 +59,7 @@ export default function CallToAction() {
 
                 {/* Dark Overlay */}
                 <div 
-                    className="absolute inset-0"
-                    style={{ background: 'rgba(0, 0, 0, 0.7)' }}
+                    className="absolute inset-0 bg-black/70"
                 ></div>
 
                 {/* Content */}

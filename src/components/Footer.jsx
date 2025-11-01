@@ -2,8 +2,8 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import Logo from "./Logo";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -81,14 +81,14 @@ export default function Footer() {
       <div className="absolute bottom-0 left-0 right-0 z-0 pointer-events-none">
         <div className="relative w-full h-[200px]">
           {/* Main Violet Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-violet-500/20 via-violet-400/10 to-transparent"></div>
+          <div className="absolute inset-0 from-violet-500/20 via-violet-400/10 to-transparent"></div>
           
           {/* Additional Glow Effects */}
           <div className="absolute bottom-0 left-1/4 w-1/2 h-32 bg-violet-400/15 blur-3xl rounded-full"></div>
           <div className="absolute bottom-4 left-1/3 w-1/3 h-24 bg-violet-300/10 blur-2xl rounded-full"></div>
           
           {/* Smooth Fade to White */}
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/70 to-transparent"></div>
+          <div className="absolute inset-0 from-white via-white/70 to-transparent"></div>
         </div>
       </div>
 

@@ -36,9 +36,9 @@ const Hero = () => {
 
             // Animate elements in sequence
             tl.to(leftContentRef.current, { opacity: 1, y: 0, duration: 1.2 })
-              .to(rightContentRef.current, { opacity: 1, y: 0, duration: 1 }, "-=0.6")
-              .to(floatingCard1Ref.current, { opacity: 1, x: 0, duration: 0.8 }, "-=0.4")
-              .to(floatingCard2Ref.current, { opacity: 1, x: 0, duration: 0.8 }, "-=0.5");
+                .to(rightContentRef.current, { opacity: 1, y: 0, duration: 1 }, "-=0.6")
+                .to(floatingCard1Ref.current, { opacity: 1, x: 0, duration: 0.8 }, "-=0.4")
+                .to(floatingCard2Ref.current, { opacity: 1, x: 0, duration: 0.8 }, "-=0.5");
 
         }, heroRef);
 
@@ -86,7 +86,7 @@ const Hero = () => {
                                 from anywhere
                             </h1>
                             <p className="text-base sm:text-lg md:text-xl lg:text-xl mb-6 sm:mb-8 text-muted-foreground leading-relaxed max-w-lg mx-auto lg:mx-0">
-                            Experience the future of payments: fast, secure, and tailored for the next generation&apos;s convenience and trust.
+                                Experience the future of payments: fast, secure, and tailored for the next generation&apos;s convenience and trust.
                             </p>
 
                             <div className="flex gap-4 lg:mb-12 text-center lg:text-left justify-center lg:justify-start">
